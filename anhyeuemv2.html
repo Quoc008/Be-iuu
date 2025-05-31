@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Chữ rơi dễ thương</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000; /* Nền đen */
+      font-family: Arial, sans-serif;
+    }
+
+    .falling-text {
+      position: absolute;
+      top: -40px;
+      font-size: 24px;
+      color: #fff;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-40px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const characters = [, 'Anh Yêu Em', '💓','💕','💖', '💗'];
+
+  function createFallingText() {
+    const text = document.createElement('div');
+    text.className = 'falling-text';
+    text.textContent = characters[Math.floor(Math.random() * characters.length)];
+
+    // Không để sát viền quá: từ 10% đến 90% chiều rộng
+    const left = window.innerWidth * (0.1 + Math.random() * 0.8);
+    const duration = 2 + Math.random() * 2; // Rơi nhanh hơn (2-4s)
+
+    text.style.left = `${left}px`;
+    text.style.animationDuration = `${duration}s`;
+
+    document.body.appendChild(text);
+
+    setTimeout(() => {
+      text.remove();
+    }, duration * 1000);
+  }
+
+  // Tăng số lượng chữ rơi: mỗi 100ms
+  setInterval(createFallingText, 100);
+</script>
+
+</body>
+</html>
